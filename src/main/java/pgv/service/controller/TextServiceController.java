@@ -31,6 +31,18 @@ public class TextServiceController implements Initializable {
 
 	   
 	
+	public Button getImportarButton() {
+		return importarButton;
+	}
+	public Button getEliminarButton() {
+		return eliminarButton;
+	}
+	public Button getExportarButton() {
+		return exportarButton;
+	}
+	public ListView<String> getLista() {
+		return lista;
+	}
 	public TextServiceController() {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/View.fxml"));
 		loader.setController(this);
