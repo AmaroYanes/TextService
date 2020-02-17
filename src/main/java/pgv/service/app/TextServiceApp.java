@@ -18,6 +18,7 @@ public class TextServiceApp  extends Application {
 	
 	public void init()  {
 		System.out.println("Sesion abierta");
+		
 
 	}
 	public void stop() {
