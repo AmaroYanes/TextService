@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -19,6 +20,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -26,7 +28,8 @@ import pgv.service.app.TextServiceApp;
 
 public class TextServiceController implements Initializable {
 
-	private String IP = "10.2.3.20";
+
+	private String IP="";
 //	private String IP = "10.2.3.12";
 
 	@FXML
@@ -74,6 +77,13 @@ public class TextServiceController implements Initializable {
 	}
 
 	public void initialize(URL location, ResourceBundle resources) {
+		TextInputDialog dialog = new TextInputDialog();
+		dialog.setTitle("Introduzca IP del servidor");
+		dialog.setContentText("Introduzca IP:");
+
+		Optional<String> result = dialog.showAndWait();
+		setIP(result.get());
+		
 		exportarButton.disableProperty().bind(lista.getSelectionModel().selectedIndexProperty().isEqualTo(-1));
 		eliminarButton.disableProperty().bind(lista.getSelectionModel().selectedIndexProperty().isEqualTo(-1));
 	}
@@ -196,6 +206,13 @@ public class TextServiceController implements Initializable {
 	@FXML
 	void onRefreshAction(ActionEvent event) {
 		listar();
+	}
+	public String getIP() {
+		return IP;
+	}
+
+	public void setIP(String iP) {
+		IP = iP;
 	}
 
 }

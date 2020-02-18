@@ -6,9 +6,11 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.util.Optional;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
 import pgv.service.controller.TextServiceController;
 
@@ -27,6 +29,7 @@ public class TextServiceApp  extends Application {
 	}
 	
 	public void init()  {
+		
 		System.out.println("Sesion abierta");
 		controller.listar();
 

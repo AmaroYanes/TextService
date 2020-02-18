@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-
 <AnchorPane fx:id="megarRoot" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane fx:id="root" layoutX="26.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -15,7 +14,7 @@
             <VBox alignment="CENTER" fillWidth="false" spacing="5.0" BorderPane.alignment="CENTER">
                <children>
                   <TextField fx:id="ipText" text="10.2.3.12" />
-                  <Button fx:id="accederButton" mnemonicParsing="false" text="Acceder" />
+                  <Button fx:id="accederButton" mnemonicParsing="false" onAction="#onAccederAction" text="Acceder" />
                </children>
             </VBox>
          </center>
