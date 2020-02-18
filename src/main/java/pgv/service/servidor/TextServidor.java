@@ -35,7 +35,8 @@ public class TextServidor {
 				DataInputStream dis = new DataInputStream(cs.getInputStream());
 				DataOutputStream dos = new DataOutputStream(cs.getOutputStream());
 				System.out.println(" - Cliente Conectado - \n\n");
-				if(dis.readUTF().equals("lista")) {
+				String recibido = dis.readUTF();
+				if(recibido.equals("lista")) {
 					System.out.println(" - Lista - \n\n");
 					String[] cosa = directorio.list();
 					for(int i= 0;i<cosa.length;i++) {
@@ -44,7 +45,16 @@ public class TextServidor {
 					
 					respuesta = aux.toString();
 				}else {
-					
+					String[] arrayRecibido = recibido.split(":");
+					String orden = arrayRecibido[0];
+					String archivo = arrayRecibido[1];
+					if(orden.equals("eliminar")) {
+						new File(TextServidor.class.getResource("/Txt/"+archivo).toString()).delete();
+					}else if(orden.equals("importar")) {
+						
+					}else if(orden.equals("exportar")) {
+						
+					}
 				}
 				System.out.println(" - Escribiendo respuesta - \n\n");
 				dos.writeUTF(respuesta);

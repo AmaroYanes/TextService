@@ -18,7 +18,10 @@ import javafx.scene.layout.BorderPane;
 
 public class TextServiceController implements Initializable {
 	
-
+	private String IP = "10.2.3.20";
+//	private String IP = "10.2.3.12";
+	
+	
     @FXML
     private BorderPane root;
 
@@ -71,8 +74,7 @@ public class TextServiceController implements Initializable {
 			System.out.println("Creando socket cliente");
 			Socket clientSocket = new Socket();
 			System.out.println ("Estableciendo la conexión");
-//			InetSocketAddress addr = new InetSocketAddress("10.2.3.12", 5555);
-			InetSocketAddress addr = new InetSocketAddress("10.2.3.20", 5555);
+			InetSocketAddress addr = new InetSocketAddress(IP, 5555);
 			clientSocket.connect(addr);
 			
 			DataInputStream entrada = new DataInputStream(clientSocket.getInputStream());
@@ -95,8 +97,28 @@ public class TextServiceController implements Initializable {
 	}
 	
 	@FXML
-    void onEliminarAction(ActionEvent event) {
+    void onEliminarAction(ActionEvent event) throws IOException {
+		System.out.println("Creando socket cliente");
+		Socket clientSocket = new Socket();
+		System.out.println ("Estableciendo la conexión");
+		InetSocketAddress addr = new InetSocketAddress(IP, 5555);
+		clientSocket.connect(addr);
+		
+		DataOutputStream salida = new DataOutputStream(clientSocket.getOutputStream());
+		try {
+				salida.writeUTF("eliminar:"+getLista().getSelectionModel().getSelectedItem());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
+		System.out.println("Mensaje enviado");
+
+		System.out.println("Cerrando el socket cliente");
+		salida.close();
+		clientSocket.close();
+		System.out.println("Terminado");
+		
+		listar();
     }
 
     @FXML
