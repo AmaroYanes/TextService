@@ -1,0 +1,11 @@
+1-Negro
+2-Turquesa
+3-Purpura
+4-Azul Cielo
+5-Marr�n
+6-Amarillo Palo
+
+Tipo 1 - normales
+Tipo 2 - Deu
+Tipo 3 - Pro
+Tipo 4 - Tri
