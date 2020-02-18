@@ -14,9 +14,12 @@ import pgv.service.controller.TextServiceController;
 
 public class TextServiceApp  extends Application {
 	TextServiceController controller = new TextServiceController();
-
+	
+	private static Stage stage;
+	
 	public void start(Stage primaryStage) throws Exception {
 		Scene scene = new Scene(controller.getRoot(),600,400);
+		stage = primaryStage;
 		primaryStage.setTitle("TextService");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -36,4 +39,8 @@ public class TextServiceApp  extends Application {
 		launch(args);
 	}
 
+	public static Stage getStage() {
+		return stage;
+	}
+	
 }

@@ -1,8 +1,11 @@
 package pgv.service.controller;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -17,6 +20,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
+import pgv.service.app.TextServiceApp;
 
 public class TextServiceController implements Initializable {
 	
@@ -157,8 +163,43 @@ public class TextServiceController implements Initializable {
     }
 
     @FXML
-    void onImportarAction(ActionEvent event) {
-    	
+    void onImportarAction(ActionEvent event) throws IOException {
+    	System.out.println("Creando socket cliente");
+		Socket clientSocket = new Socket();
+		System.out.println ("Estableciendo la conexión");
+		InetSocketAddress addr = new InetSocketAddress(IP, 5555);
+		clientSocket.connect(addr);
+		
+		DataInputStream entrada = new DataInputStream(clientSocket.getInputStream());
+		DataOutputStream salida = new DataOutputStream(clientSocket.getOutputStream());
+		
+		FileChooser fc = new FileChooser();
+		fc.getExtensionFilters().addAll(new ExtensionFilter("txt files","*.txt"));
+		
+		fc.setTitle("Importar Txt");
+		
+		File fichero = fc.showOpenDialog(TextServiceApp.getStage());
+		BufferedReader br  = new BufferedReader(new FileReader(fichero));
+		salida.writeUTF("importar:"+fichero.getName());
+		String linea;
+		try {
+			while((linea = br.readLine())!=null) {
+				salida.writeUTF(linea);
+			}
+		} catch (Exception e) {
+			System.out.println("Importado");
+			br.close();
+		}
+
+		System.out.println("Mensaje enviado");
+
+		System.out.println("Cerrando el socket cliente");
+		entrada.close();
+		salida.close();
+		clientSocket.close();
+		System.out.println("Terminado");
+		
+		listar();
     }
 
     @FXML

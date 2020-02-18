@@ -5,6 +5,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -55,7 +56,14 @@ public class TextServidor {
 						System.out.println(new File("Txt/"+archivo).delete());
 						
 					}else if(orden.equals("importar")) {
-						
+						BufferedWriter bw = new BufferedWriter( new FileWriter("Txt/"+archivo));
+						try {
+							while(true) {
+								bw.write(dis.readUTF()+"\n");
+							}
+						} catch (Exception e) {
+							bw.close();
+						}
 					}else if(orden.equals("exportar")) {
 						BufferedReader br = new BufferedReader( new FileReader("Txt/"+archivo));
 						String aux2;
