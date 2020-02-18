@@ -3,17 +3,18 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
-
-<BorderPane fx:id="root" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1">
+<BorderPane fx:id="root" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <bottom>
       <HBox spacing="5.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="importarButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Importar" HBox.hgrow="ALWAYS" />
-            <Button fx:id="eliminarButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Eliminar" HBox.hgrow="ALWAYS" />
-            <Button fx:id="exportarButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Exportar" HBox.hgrow="ALWAYS" />
+            <Button fx:id="importarButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onImportarAction" text="Importar" HBox.hgrow="ALWAYS" />
+            <Button fx:id="eliminarButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onEliminarAction" text="Eliminar" HBox.hgrow="ALWAYS" />
+            <Button fx:id="exportarButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onExportarButton" text="Exportar" HBox.hgrow="ALWAYS" />
          </children>
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -21,9 +22,29 @@
       </HBox>
    </bottom>
    <center>
-      <ListView fx:id="lista" BorderPane.alignment="CENTER" />
+      <ListView fx:id="lista" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <padding>
+            <Insets top="3.0" />
+         </padding></ListView>
    </center>
    <padding>
       <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
    </padding>
+   <top>
+      <Button fx:id="refreshButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onRefreshAction" BorderPane.alignment="TOP_RIGHT">
+         <graphic>
+            <ImageView fitHeight="13.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/refresh.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <BorderPane.margin>
+            <Insets bottom="3.0" />
+         </BorderPane.margin>
+      </Button>
+   </top>
 </BorderPane>

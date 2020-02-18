@@ -13,7 +13,7 @@ import java.net.Socket;
 public class TextServidor {
 
 	public static void main(String[] args) {
-		StringBuilder aux = new StringBuilder();
+		
 		String respuesta="";
 		ServerSocket ss = null;
 		try {
@@ -29,6 +29,7 @@ public class TextServidor {
 		try {
 			System.out.println(" - Servidor creado -\n\n");
 			while (true) {
+				StringBuilder aux = new StringBuilder();
 				System.out.println(" -  Esperando  - \n\n");
 				cs = ss.accept();
 				DataInputStream dis = new DataInputStream(cs.getInputStream());
