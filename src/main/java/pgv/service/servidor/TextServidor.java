@@ -49,7 +49,7 @@ public class TextServidor {
 					String orden = arrayRecibido[0];
 					String archivo = arrayRecibido[1];
 					if(orden.equals("eliminar")) {
-						System.out.println(new File("/Txt/"+archivo).toString());
+						System.out.println(new File("Txt/"+archivo).delete());
 						
 					}else if(orden.equals("importar")) {
 						
