@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -22,8 +23,6 @@ public class TextServidor {
 			e1.printStackTrace();
 		}
 		Socket cs;
-		BufferedReader br;
-		BufferedWriter bw;
 		File directorio = new  File("Txt");
 //		ArrayList<String> clientes = new ArrayList<String>(); 
 		try {
@@ -34,6 +33,9 @@ public class TextServidor {
 				cs = ss.accept();
 				DataInputStream dis = new DataInputStream(cs.getInputStream());
 				DataOutputStream dos = new DataOutputStream(cs.getOutputStream());
+				
+				
+				
 				System.out.println(" - Cliente Conectado - \n\n");
 				String recibido = dis.readUTF();
 				if(recibido.equals("lista")) {
@@ -44,6 +46,7 @@ public class TextServidor {
 					}
 					
 					respuesta = aux.toString();
+					dos.writeUTF(respuesta);
 				}else {
 					String[] arrayRecibido = recibido.split(":");
 					String orden = arrayRecibido[0];
@@ -54,11 +57,16 @@ public class TextServidor {
 					}else if(orden.equals("importar")) {
 						
 					}else if(orden.equals("exportar")) {
-						
+						BufferedReader br = new BufferedReader( new FileReader("Txt/"+archivo));
+						String aux2;
+						while((aux2 = br.readLine())!= null) {
+							dos.writeUTF(aux2);
+						}
+						br.close();
+						dos.close();
 					}
 				}
-				System.out.println(" - Escribiendo respuesta - \n\n");
-				dos.writeUTF(respuesta);
+				
 				
 			}
 

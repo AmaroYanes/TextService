@@ -1,7 +1,9 @@
 package pgv.service.controller;
 
+import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
@@ -122,13 +124,40 @@ public class TextServiceController implements Initializable {
     }
 
     @FXML
-    void onExportarButton(ActionEvent event) {
+    void onExportarButton(ActionEvent event) throws IOException {
+    	System.out.println("Creando socket cliente");
+		Socket clientSocket = new Socket();
+		System.out.println ("Estableciendo la conexión");
+		InetSocketAddress addr = new InetSocketAddress(IP, 5555);
+		clientSocket.connect(addr);
+		
+		DataInputStream entrada = new DataInputStream(clientSocket.getInputStream());
+		DataOutputStream salida = new DataOutputStream(clientSocket.getOutputStream());
+		
+		BufferedWriter bw  = new BufferedWriter(new FileWriter("Txt/"+getLista().getSelectionModel().getSelectedItem()));
+		salida.writeUTF("exportar:"+getLista().getSelectionModel().getSelectedItem());
+		try {
+			while(true) {
+				bw.write(entrada.readUTF());
+			}
+		} catch (Exception e) {
+			System.out.println("Exportado");
+		}
 
+		System.out.println("Mensaje enviado");
+
+		System.out.println("Cerrando el socket cliente");
+		entrada.close();
+		salida.close();
+		clientSocket.close();
+		System.out.println("Terminado");
+		
+		listar();
     }
 
     @FXML
     void onImportarAction(ActionEvent event) {
-
+    	
     }
 
     @FXML
