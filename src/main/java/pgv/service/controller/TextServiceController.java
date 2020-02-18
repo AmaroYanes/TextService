@@ -138,10 +138,11 @@ public class TextServiceController implements Initializable {
 		salida.writeUTF("exportar:"+getLista().getSelectionModel().getSelectedItem());
 		try {
 			while(true) {
-				bw.write(entrada.readUTF());
+				bw.write(entrada.readUTF()+"\n");
 			}
 		} catch (Exception e) {
 			System.out.println("Exportado");
+			bw.close();
 		}
 
 		System.out.println("Mensaje enviado");
