@@ -24,7 +24,7 @@ public class TextServidor {
 		Socket cs;
 		BufferedReader br;
 		BufferedWriter bw;
-		File directorio = new  File("src\\main\\resources\\Txt");
+		File directorio = new  File("Txt");
 //		ArrayList<String> clientes = new ArrayList<String>(); 
 		try {
 			System.out.println(" - Servidor creado -\n\n");
@@ -49,7 +49,7 @@ public class TextServidor {
 					String orden = arrayRecibido[0];
 					String archivo = arrayRecibido[1];
 					if(orden.equals("eliminar")) {
-						System.out.println(new File(TextServidor.class.getResource("/Txt/"+archivo).toString()));
+						System.out.println(new File("/Txt/"+archivo).toString());
 						
 					}else if(orden.equals("importar")) {
 						
